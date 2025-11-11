@@ -1,0 +1,10 @@
+[package]
+name = "compyglot"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+fluent = "0.17.0"
+
+[profile.release]
+opt-level = 3
