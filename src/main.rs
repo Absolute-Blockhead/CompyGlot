@@ -1,4 +1,5 @@
 use compyglot::*;
+use fluent_bundle::FluentArgs;
 use std::error::Error;
 
 //===============\\
@@ -13,7 +14,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let identifier: TranslationKey = TranslationKey::new(&locale, "hello-world");
     let message: TranslationKey = TranslationKey::new(&locale, "will-is-cool");
-    let app_info: TranslationKey = TranslationKey::new(&locale, "software-info");
+
+    let mut arguments: FluentArgs = FluentArgs::new();
+    arguments.set("application-name", "Compyglot Test");
+
+    let app_info: TranslationKey = TranslationKey::new_with_args(&locale, "software-info", &arguments);
 
     println!("{}", identifier.value());
     println!("{}", message.value());

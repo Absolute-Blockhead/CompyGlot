@@ -1,5 +1,4 @@
 hello-world = Hello World
-will-is-cool = Will is Cool!
+i-am-cool = I am Cool!
 
--applcation-name = Compy!
-software-info = You're running { -application-name } version 0.1.0!
+software-info = You're running{$application-name}version 0.1.0!

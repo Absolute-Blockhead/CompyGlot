@@ -2,6 +2,7 @@
 // IMPORTS \\
 //=========\\
 use fluent::{FluentBundle, FluentMessage, FluentResource};
+use fluent_bundle::FluentArgs;
 use std::borrow::Cow;
 use std::fs::DirEntry;
 use std::io::ErrorKind;
@@ -28,6 +29,7 @@ pub fn load_translation_file(language: &str, file: Option<&str>) -> io::Result<F
     Ok(bundle)
 
 }//End of Function
+
 
 // I'm not sure how having multiple resources in a bundle works, I must do some more research on that.
 pub fn load_translation(language: &str) -> io::Result<FluentBundle<FluentResource>> {
@@ -73,6 +75,23 @@ impl TranslationKey {
 
             },
             |value| locale.format_pattern(value, None, &mut vec![]));
+
+        TranslationKey(formatted_value.to_string(), ())
+
+    }//End of Constructor
+
+    pub fn new_with_args(locale: &FluentBundle<FluentResource>, translation_id: &str, arguments: &FluentArgs) -> TranslationKey {
+
+        let formatted_value: Cow<str> = locale
+            .get_message(translation_id)
+            .and_then(|message: FluentMessage| message.value())
+            .map_or_else(|| {
+
+                println!("The message behind '{}' doesn't exist.", translation_id);
+                "".into()//Default value if None
+
+            },
+            |value| locale.format_pattern(value, Some(arguments), &mut vec![]));
 
         TranslationKey(formatted_value.to_string(), ())
 

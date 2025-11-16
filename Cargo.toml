@@ -5,6 +5,10 @@ edition = "2024"
 
 [dependencies]
 fluent = "0.17.0"
+fluent-resmgr = "0.0.8"
+fluent-langneg = "0.13.1"
+fluent-bundle = "0.16.0"
+unic-langid = "0.9.6"
 
 [profile.release]
 opt-level = 3
